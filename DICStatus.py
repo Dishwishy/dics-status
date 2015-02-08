@@ -15,14 +15,15 @@ xbHeaders = {'X-AUTH' : xbKey }
 fbAuthForm = {'access_token' : fbKey }
 
 #user IDs for XBOX
+#you'll have to use the xboxapi to get these
+#or scrape them from your login
 boneList = \
-{ 'kyle'  : '2533274809127358',
-'colburn' : '2535449548043467',
-'ed' : '2533274821230520',
-'phil' : '2533274879435275',
-#ryansul : '275912495028211',
-'gorka' : '2533274816880090',
-'daniel' : '2533274813492825'}
+{ 'kyle'  : '',
+'colburn' : '',
+'ed' : '',
+'phil' : '',
+'gorka' : '',
+'daniel' : ''}
 
 
 
