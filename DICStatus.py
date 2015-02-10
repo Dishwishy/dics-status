@@ -34,6 +34,7 @@ def xbapiURL(xuid):
 
 def xbPresenseParse(gamerTagList):
     destinyCtr = 0
+    gamerListLen = len(boneList)
     message = "A Friendly Reminder from Robo-DIC: \n"
     for name, xid in gamerTagList.iteritems():
         xbAPIreq = requests.get(xbapiURL(xid), headers=xbHeaders)
