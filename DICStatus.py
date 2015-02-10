@@ -18,12 +18,12 @@ fbAuthForm = {'access_token' : fbKey }
 #you'll have to use the xboxapi to get these
 #or scrape them from your login
 boneList = \
-{ 'kyle'  : '',
-'colburn' : '',
-'ed' : '',
-'phil' : '',
-'gorka' : '',
-'daniel' : ''}
+{ 'kyle'  : '2533274809127358',
+'colburn' : '2535449548043467',
+'ed' : '2730307274094389',
+'phil' : '2533274879435275',
+'gorka' : '2533274816880090',
+'daniel' : '2533274813492825'}
 
 
 
@@ -33,6 +33,8 @@ def xbapiURL(xuid):
     return url
 
 def xbPresenseParse(gamerTagList):
+    destinyCtr = 0
+    gamerListLen = len(boneList)
     message = "A Friendly Reminder from Robo-DIC: \n"
     for name, xid in gamerTagList.iteritems():
         xbAPIreq = requests.get(xbapiURL(xid), headers=xbHeaders)
@@ -43,14 +45,18 @@ def xbPresenseParse(gamerTagList):
         print presMsg
         if (presMsg['state'] != "Offline"):
            try:
-               message = message + name + " is currently playing " + presMsg["devices"][0]["titles"][1]["name"]+ "\n"
+               curPlay = presMsg["devices"][0]["titles"][1]["name"]
            except:
-               print presMsg
-           else:
-               message = message + name + " is currently playing " + presMsg["devices"][0]["titles"][0]["name"] + "\n"
+               curPlay = presMsg["devices"][0]["titles"][0]["name"] 
+           if curPlay == "Destiny":
+               destinyCtr += 1
+           message = message + name + " is currently playing " + curPlay + "\n" 
         else:
            message = message + name + " is offline \n"
-    return message
+    if destinyCtr >= 3:
+        return message
+    else:
+        return 0
 
 
 #get our message from xbox API
