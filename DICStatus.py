@@ -14,6 +14,10 @@ fbKey = keyData['fbapikey']
 xbHeaders = {'X-AUTH' : xbKey }
 fbAuthForm = {'access_token' : fbKey }
 
+#import Trogdor
+f = open("/home/kyle/DICS_status/trog.ascii")
+trog = f.read()
+
 #user IDs for XBOX
 #you'll have to use the xboxapi to get these
 #or scrape them from your login
@@ -54,15 +58,18 @@ def xbPresenseParse(gamerTagList):
         else:
            message = message + name + " is offline \n"
     if destinyCtr >= 3:
+        message = message + "\n" + trog
         return message
     else:
-        return 0
+        return 10
 
 
 #get our message from xbox API
 xbMessage = xbPresenseParse(boneList)
 if xbMessage == 0:
     print "Error calling xbox API, no data posted to facebook"
+elif xbMessage == 10:
+    print "Error: Not enough destiny players\n" + trog
 else :
     #add new key value pair to dictionary
     fbAuthForm['message'] = xbMessage
